@@ -40,6 +40,6 @@ jobs:
 
       - name: Artifact login
         run: |
-          export GOOGLE_APPLICATION_CREDENTIALS=${{ steps.auth.outputs.credentials_file_path }}
+          gcloud auth activate-service-account ${{ secrets.SERVICE_ACCOUNT }} --key-file=${{ steps.auth.outputs.credentials_file_path }}
           npx google-artifactregistry-auth --repo-config=[./.npmrc] --credential-config=[./.npmrc]
 
