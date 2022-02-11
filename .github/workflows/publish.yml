@@ -43,5 +43,5 @@ jobs:
 
       - name: Artifact login
         run: |
-          npx google-artifactregistry-auth@v3 --repo-config=[./.npmrc] --credential-config=[./.npmrc]
+          npx google-artifactregistry-auth --repo-config=[./.npmrc] --credential-config=[./.npmrc]
 
