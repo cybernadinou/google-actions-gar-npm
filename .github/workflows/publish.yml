@@ -28,18 +28,20 @@ jobs:
         with:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
-          create_credentials_file: true
+          token_format: 'access_token'
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v0"
 
       - name: Create .npmrc
         run: |
           cat << EOF > .npmrc
             @example:registry=https://asia-east2-npm.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/npm-repository/
-            //asia-east2-npm.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/npm-repository/:_authToken=""
+            //asia-east2-npm.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/npm-repository/:_authToken="${{ steps.auth.outputs.access_token }}"
             //asia-east2-npm.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/npm-repository/:always-auth=true
           EOF
 
       - name: Artifact login
         run: |
-          gcloud auth activate-service-account ${{ secrets.SERVICE_ACCOUNT }} --key-file=${{ steps.auth.outputs.credentials_file_path }}
-          npx google-artifactregistry-auth --repo-config=[./.npmrc] --credential-config=[./.npmrc]
+          npm publish
 
