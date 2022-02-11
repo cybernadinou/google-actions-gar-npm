@@ -43,6 +43,6 @@ jobs:
 
       - name: Artifact login
         run: |
-          gcloud auth application-default login --client-id-file=${{ steps.auth.outputs.credentials_file_path }}
+          gcloud auth application-default login --client-id-file=${{ steps.auth.outputs.credentials_file_path }} --no-browser
           npx google-artifactregistry-auth@v3 --repo-config=[./.npmrc] --credential-config=[./.npmrc]
 
