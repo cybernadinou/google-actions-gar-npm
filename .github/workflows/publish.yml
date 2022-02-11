@@ -43,6 +43,6 @@ jobs:
 
       - name: Artifact login
         run: |
-          #export GOOGLE_APPLICATION_CREDENTIALS=${{ steps.auth.outputs.credentials_file_path }}
+          gcloud auth application-default login
           npx google-artifactregistry-auth@v3 --repo-config=[./.npmrc] --credential-config=[./.npmrc]
 
