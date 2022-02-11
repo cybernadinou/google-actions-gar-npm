@@ -41,7 +41,7 @@ jobs:
             //asia-east2-npm.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/npm-repository/:always-auth=true
           EOF
 
-      - name: Artifact login
+      - name: Publish
         run: |
           npm publish
 
