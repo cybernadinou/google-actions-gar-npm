@@ -44,5 +44,5 @@ jobs:
       - name: Artifact login
         run: |
           #export GOOGLE_APPLICATION_CREDENTIALS=${{ steps.auth.outputs.credentials_file_path }}
-          npx google-artifactregistry-auth --repo-config=[./.npmrc] --credential-config=[./.npmrc]
+          npx google-artifactregistry-auth@v3 --repo-config=[./.npmrc] --credential-config=[./.npmrc]
 
